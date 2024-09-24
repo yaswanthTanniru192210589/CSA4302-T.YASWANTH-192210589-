@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery Delight - Menu</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6b4e31;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .menu-item h2 {
+            margin: 15px 0;
+            color: #6b4e31;
+        }
+
+        .menu-item p {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #6b4e31;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8b5e3c;
+        }
+
+        /* Cart button styles */
+        .cart-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #6b4e31;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background-color: #8b5e3c;
+        }
+
+        /* Expandable content */
+        .details {
+            display: none;
+            margin-top: 10px;
+            text-align: left;
+            color: #666;
+        }
+
+        .show-details {
+            cursor: pointer;
+            color: #6b4e31;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Cake Menu</h1>
+        <div class="menu-grid">
+            <!-- Chocolate Cake -->
+            <div class="menu-item">
+                <img src="c1.jpg" alt="Chocolate Cake">
+                <h2>Chocolate Cake</h2>
+                <p>Rich and delicious chocolate cake topped with creamy frosting.</p>
+                <p class="show-details" onclick="toggleDetails('chocolate-details')">Read More</p>
+                <div id="chocolate-details" class="details">
+                    <p>This chocolate cake is made with the finest cocoa, layered with smooth chocolate ganache. Perfect for celebrations!</p>
+                </div>
+                <a href="sec.html" class="btn">Order Now</a>
+            </div>
+
+            <!-- Vanilla Cake -->
+            <div class="menu-item">
+                <img src="c2.jpg" alt="Vanilla Cake">
+                <h2>Vanilla Cake</h2>
+                <p>Light and fluffy vanilla cake topped with buttercream.</p>
+                <p class="show-details" onclick="toggleDetails('vanilla-details')">Read More</p>
+                <div id="vanilla-details" class="details">
+                    <p>A classic vanilla cake, featuring a soft crumb and a light buttery flavor, topped with rich vanilla frosting.</p>
+                </div>
+                <a href="vanilla.html" class="btn">Order Now</a>
+            </div>
+
+            <!-- Red Velvet Cake -->
+            <div class="menu-item">
+                <img src="c7.jpg" alt="Red Velvet Cake">
+                <h2>Red Velvet Cake</h2>
+                <p>Classic red velvet cake with tangy cream cheese frosting.</p>
+                <p class="show-details" onclick="toggleDetails('redvelvet-details')">Read More</p>
+                <div id="redvelvet-details" class="details">
+                    <p>This cake has a soft, velvety texture with a hint of cocoa, complemented by a rich cream cheese frosting.</p>
+                </div>
+                <a href="red.html" class="btn">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="cart.html" class="cart-btn">Cart</a> <!-- Cart button -->
+
+    <script>
+        function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

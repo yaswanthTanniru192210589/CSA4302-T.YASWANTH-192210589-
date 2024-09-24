@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Velvet Cake Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('y2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .menu-item-content {
+            padding: 15px;
+        }
+        .menu-item h3 {
+            margin: 0;
+            font-size: 1.6em;
+            color: #333;
+        }
+        .menu-item p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+        .price {
+            font-size: 1.4em;
+            color: #000000;
+            margin: 10px 0;
+        }
+        .add-to-cart {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #85dda2;
+            transform: translateY(-3px);
+        }
+        .cart-summary {
+            margin: 40px auto;
+            text-align: left;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Red Velvet Cake Menu</h1>
+    <div class="menu">
+        <div class="menu-item">
+            <img src="Q1" alt="Classic Red Velvet Cake">
+            <div class="menu-item-content">
+                <h3>Classic Red Velvet Cake</h3>
+                <p>Rich and velvety red cake with a cream cheese frosting.</p>
+                <div class="price">RS350</div>
+                <button class="add-to-cart" onclick="addToCart('Classic Red Velvet Cake', 350)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q2" alt="Red Velvet Cake with Raspberries">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Raspberries</h3>
+                <p>Classic red velvet with a fresh raspberry twist.</p>
+                <div class="price">RS410</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Raspberries', 410)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q3.webp" alt="Red Velvet Cake with Chocolate">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Chocolate</h3>
+                <p>Red velvet cake with a rich chocolate ganache.</p>
+                <div class="price">RS450</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Chocolate', 450)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q4" alt="Red Velvet Cake with Almonds">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Almonds</h3>
+                <p>A delightful red velvet cake topped with crunchy almonds.</p>
+                <div class="price">RS450</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Almonds', 450)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q5" alt="Red Velvet Cake with Cream">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Cream</h3>
+                <p>Soft red velvet cake with a smooth cream frosting.</p>
+                <div class="price">RS490</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Cream', 490)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q6" alt="Red Velvet Cake with Strawberries">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Strawberries</h3>
+                <p>Red velvet cake topped with fresh strawberries and whipped cream.</p>
+                <div class="price">RS550</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Strawberries', 550)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q7" alt="Red Velvet Cake with Caramel">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Caramel</h3>
+                <p>Sweet red velvet cake drizzled with rich caramel sauce.</p>
+                <div class="price">RS650</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Caramel', 650)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q8" alt="Red Velvet Cake with Mint">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Mint</h3>
+                <p>Red velvet cake infused with fresh mint flavor.</p>
+                <div class="price">RS700</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Mint', 700)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Q9.jpeg" alt="Red Velvet Cake with Orange">
+            <div class="menu-item-content">
+                <h3>Red Velvet Cake with Orange</h3>
+                <p>Red velvet cake with a hint of orange zest and a light glaze.</p>
+                <div class="price">RS750</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake with Orange', 750)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery Delight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to add items to the cart
+        function addToCart(itemName, itemPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === itemName);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${itemName} has been added to your cart! Quantity: ${cart[existingItemIndex]?.quantity || 1}`);
+            displayCart(); // Display the updated cart
+        }
+
+        // Function to display cart items
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalDiv = document.getElementById('cart-total');
+
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotalDiv.innerHTML = '';
+            } else {
+                cart.forEach(item => {
+                    cartItemsDiv.innerHTML += `<p>${item.name} - RS${item.price} (Quantity: ${item.quantity})</p>`;
+                    total += item.price * item.quantity;
+                });
+                cartTotalDiv.innerHTML = `Total: RS${total}`;
+            }
+        }
+
+        // Function to place an order
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to your cart before placing an order.");
+                return;
+            }
+
+            alert("Thank you for your order!");
+            localStorage.removeItem('cart'); // Clear the cart
+            displayCart(); // Clear displayed cart
+            window.location.href = 'index.html'; // Redirect back to the main page
+        }
+
+        // Display cart on page load
+        document.addEventListener('DOMContentLoaded', displayCart);
+    </script>
+</body>
+</html>

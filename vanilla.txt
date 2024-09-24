@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla Cake Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('y2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .menu-item-content {
+            padding: 15px;
+        }
+        .menu-item h3 {
+            margin: 0;
+            font-size: 1.6em;
+            color: #333;
+        }
+        .menu-item p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+        .price {
+            font-size: 1.4em;
+            color: #000000;
+            margin: 10px 0;
+        }
+        .add-to-cart {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #85dda2;
+            transform: translateY(-3px);
+        }
+        .cart-summary {
+            margin: 40px auto;
+            text-align: left;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Vanilla Cake Menu</h1>
+    <div class="menu">
+        <div class="menu-item">
+            <img src="A1" alt="Classic Vanilla Cake">
+            <div class="menu-item-content">
+                <h3>Classic Vanilla Cake</h3>
+                <p>A timeless vanilla sponge cake with a hint of sweetness.</p>
+                <div class="price">RS250</div>
+                <button class="add-to-cart" onclick="addToCart('Classic Vanilla Cake', 250)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A2" alt="Vanilla Bean Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Bean Cake</h3>
+                <p>Made with real vanilla beans for a rich and aromatic flavor.</p>
+                <div class="price">RS350</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Bean Cake', 350)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A3" alt="Vanilla Almond Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Almond Cake</h3>
+                <p>Vanilla cake with almond essence and a touch of elegance.</p>
+                <div class="price">RS400</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Almond Cake', 400)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A4" alt="Vanilla Coconut Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Coconut Cake</h3>
+                <p>A tropical twist with coconut flakes and vanilla frosting.</p>
+                <div class="price">RS420</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Coconut Cake', 420)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A5.jpg" alt="Vanilla Berry Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Berry Cake</h3>
+                <p>Layers of vanilla cake with fresh berries and cream.</p>
+                <div class="price">RS450</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Berry Cake', 450)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A6" alt="Vanilla Chocolate Swirl Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Chocolate Swirl Cake</h3>
+                <p>Vanilla cake with a decadent chocolate swirl throughout.</p>
+                <div class="price">RS500</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Chocolate Swirl Cake', 500)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A7" alt="Vanilla Cream Cheese Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Cream Cheese Cake</h3>
+                <p>Rich and creamy vanilla cake with a tangy cream cheese frosting.</p>
+                <div class="price">RS550</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Cream Cheese Cake', 550)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A8" alt="Vanilla Honey Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Honey Cake</h3>
+                <p>Sweet vanilla cake infused with a hint of honey and topped with a honey glaze.</p>
+                <div class="price">RS600</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Honey Cake', 600)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="A9" alt="Vanilla Lemon Cake">
+            <div class="menu-item-content">
+                <h3>Vanilla Lemon Cake</h3>
+                <p>Vanilla cake with a zesty lemon twist and a light lemon glaze.</p>
+                <div class="price">RS700</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Lemon Cake', 700)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery Delight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to add items to the cart
+        function addToCart(itemName, itemPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === itemName);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${itemName} has been added to your cart! Quantity: ${cart[existingItemIndex]?.quantity || 1}`);
+            displayCart(); // Display the updated cart
+        }
+
+        // Function to display cart items
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalDiv = document.getElementById('cart-total');
+
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotalDiv.innerHTML = '';
+            } else {
+                cart.forEach(item => {
+                    cartItemsDiv.innerHTML += `<p>${item.name} - RS${item.price} (Quantity: ${item.quantity})</p>`;
+                    total += item.price * item.quantity;
+                });
+                cartTotalDiv.innerHTML = `Total: RS${total}`;
+            }
+        }
+
+        // Function to place an order
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to your cart before placing an order.");
+                return;
+            }
+
+            alert("Thank you for your order!");
+            localStorage.removeItem('cart'); // Clear the cart
+            displayCart(); // Clear displayed cart
+            window.location.href = 'index.html'; // Redirect back to the main page
+        }
+
+        // Display cart on page load
+        document.addEventListener('DOMContentLoaded', displayCart);
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .cart-items {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #333;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .order-button, .pay-button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .order-button:hover, .pay-button:hover {
+            background-color: #e6554f;
+        }
+        .delete-button, .quantity-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .quantity-button {
+            background-color: #4CAF50;
+        }
+        .delete-button:hover, .quantity-button:hover {
+            opacity: 0.9;
+        }
+        .delivery-details, .payment-details {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+        .delivery-details input, .delivery-details select, .delivery-details textarea,
+        .payment-details input, .payment-details select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .delivery-details label, .payment-details label {
+            display: block;
+            text-align: left;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="total" id="cart-total"></div>
+
+    <!-- Delivery Details Form -->
+    <div class="delivery-details">
+        <h2>Delivery Details</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" placeholder="Enter your address" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" placeholder="Enter your phone number" required>
+
+        <label for="purpose">Purpose of Ordering:</label>
+        <select id="purpose" required>
+            <option value="">Select purpose</option>
+            <option value="Personal consumption">Personal consumption</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="delivery-date">Preferred Delivery Date:</label>
+        <input type="date" id="delivery-date" required>
+
+        <label for="delivery-time">Preferred Delivery Time:</label>
+        <input type="time" id="delivery-time" required>
+
+        <label for="instructions">Special Instructions:</label>
+        <textarea id="instructions" rows="3" placeholder="Any special instructions?"></textarea>
+    </div>
+
+    <!-- Payment Details Form -->
+    <div class="payment-details">
+        <h2>Payment Information</h2>
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method" required>
+            <option value="">Select payment method</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
+
+        <div id="credit-card-info" style="display: none;">
+            <label for="card-name">Cardholder Name:</label>
+            <input type="text" id="card-name" placeholder="Name on card">
+
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" placeholder="Enter card number">
+
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="month" id="expiry-date">
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="CVV">
+        </div>
+        
+        <div id="paypal-info" style="display: none;">
+            <p>You will be redirected to PayPal to complete the payment.</p>
+        </div>
+    </div>
+
+    <!-- Pay Button -->
+    <button class="order-button" onclick="placeOrder()">Place Order</button>
+
+    <script>
+        function addToCart(itemName, itemPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === itemName);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${itemName} has been added to your cart! Quantity: ${cart[existingItemIndex]?.quantity || 1}`);
+            displayCart(); // Display the cart after adding
+        }
+
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalDiv = document.getElementById('cart-total');
+
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotalDiv.innerHTML = '';
+            } else {
+                cart.forEach((item, index) => {
+                    cartItemsDiv.innerHTML += `
+                        <p>${item.name} - RS${item.price} (Quantity: ${item.quantity})
+                        <button class="quantity-button" onclick="changeQuantity(${index}, 1)">+</button>
+                        <button class="quantity-button" onclick="changeQuantity(${index}, -1)">-</button>
+                        <button class="delete-button" onclick="removeFromCart(${index})">Delete</button></p>`;
+                    total += item.price * item.quantity; // Correctly calculate total
+                });
+                cartTotalDiv.innerHTML = `Total: RS${total}`;
+            }
+        }
+
+        function changeQuantity(index, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart[index].quantity + delta > 0) {
+                cart[index].quantity += delta;
+            } else {
+                cart.splice(index, 1); // Remove item if quantity becomes 0
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart(); // Refresh the cart display after quantity change
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1); // Remove the item from the cart array
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart(); // Refresh the cart display after deletion
+        }
+
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const purpose = document.getElementById('purpose').value;
+            const deliveryDate = document.getElementById('delivery-date').value;
+            const deliveryTime = document.getElementById('delivery-time').value;
+            const instructions = document.getElementById('instructions').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to your cart before placing an order.");
+                return;
+            }
+
+            if (!name || !email || !address || !phone || !purpose || !deliveryDate || !deliveryTime || !paymentMethod) {
+                alert("Please fill out all delivery and payment details before placing your order.");
+                return;
+            }
+
+            if (paymentMethod === "Credit Card") {
+                const cardName = document.getElementById('card-name').value;
+                const cardNumber = document.getElementById('card-number').value;
+                const expiryDate = document.getElementById('expiry-date').value;
+                const cvv = document.getElementById('cvv').value;
+
+                if (!cardName || !cardNumber || !expiryDate || !cvv) {
+                    alert("Please enter valid credit card details.");
+                    return;
+                }
+            }
+
+            alert(`Thank you for your order, ${name}!\nYour order for "${purpose}" will be delivered on ${deliveryDate} at ${deliveryTime} to ${address}.\nPayment Method: ${paymentMethod}\nSpecial Instructions: ${instructions}\nWe will contact you at ${phone} if needed.`);
+            localStorage.removeItem('cart'); // Clear the cart
+            displayCart(); // Clear displayed cart
+            window.location.href = 'THANK.html'; // Redirect back to the main page
+        }
+
+        function processPayment() {
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if (paymentMethod === "PayPal") {
+                window.location.href = "https://www.paypal.com"; // Redirect to PayPal
+            } else if (paymentMethod === "Credit Card") {
+                alert("Processing credit card payment... (Simulation)");
+            } else {
+                alert("Please select a valid payment method.");
+            }
+        }
+
+        document.getElementById('payment-method').addEventListener('change', function() {
+            const paymentMethod = this.value;
+            if (paymentMethod === "Credit Card") {
+                document.getElementById('credit-card-info').style.display = 'block';
+                document.getElementById('paypal-info').style.display = 'none';
+            } else if (paymentMethod === "PayPal") {
+                document.getElementById('credit-card-info').style.display = 'none';
+                document.getElementById('paypal-info').style.display = 'block';
+            } else {
+                document.getElementById('credit-card-info').style.display = 'none';
+                document.getElementById('paypal-info').style.display = 'none';
+            }
+        });
+
+        window.onload = displayCart; // Display the cart on page load
+    </script>
+</body>
+</html>
